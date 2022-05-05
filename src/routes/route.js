@@ -2,7 +2,8 @@ const express = require('express');
 const { helloGet, createAdmin,isAdmin } = require('../controllers/adminController');
 const { enrollCourse, clientReview, customers, reviews } = require('../controllers/clientController');
 const { customerEnrollment } = require('../controllers/enrollmentController');
-const {createService, services} = require('../controllers/serviceController')
+const {createService, services} = require('../controllers/serviceController');
+const { updateEnrollCourseStatus } = require('../controllers/updateController');
 const router = express.Router();
 
 
@@ -18,4 +19,6 @@ router.get('/client-list', customers);
 router.get('/customer-reviews',reviews);
 router.get('/service-provide', services);
 router.get('/client-enrollment', customerEnrollment);
+
+router.patch('/status/:id', updateEnrollCourseStatus)
 module.exports = router;
