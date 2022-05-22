@@ -10,10 +10,10 @@ const schemas = {
 }
 
 const db = mysql.createConnection({
-    host: `${process.env.HOST}`,
-    user: `${process.env.USERNAME}`,
-    password: `${process.env.PASSWORD}`,
-    database: `${process.env.DATABASE}`
+    host: `${process.env.PLANETSCALE_DB_HOST}`,
+    user: `${process.env.PLANETSCALE_DB_USERNAME}`,
+    password: `${process.env.PLANETSCALE_DB_PASSWORD}`,
+    database: `${process.env.PLANETSCALE_DB}`
 });
 
 
