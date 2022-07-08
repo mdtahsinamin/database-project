@@ -1,34 +1,30 @@
 const db = require('../helpers/mysql');
-
-exports.enrollCourse = (req, res) => {
+const cloudinary = require('cloudinary').v2
+exports.enrollCourse = async (req, res) => {
+   
     const file = req.files.file;
+    const myCloud = await cloudinary.uploader.upload(file.tempFilePath,{
+        folder: 'User-Profile',
+      }
+    )
      
     const name = req.body.name;
     
     const email = req.body.email;
 
-    const courseName = req.body.courseName;
+    const courseName = req.body.course;
 
     const projectDetails = req.body.projectDetails;
 
     const status = req.body.status;
-   
-    const newImg = file.data;
-    const encImg = newImg.toString('base64');
 
-    var image = {
-     contentType: file.mimetype,
-     size: file.size,
-     img: Buffer.from(encImg, 'base64')
-    }
+    const image =  myCloud.secure_url;
 
-
-    const jsonImg = JSON.stringify(image);
 
 
    const sqlStatement = "INSERT INTO customers (name, email,courseName,projectDetails, status , image) VALUES (?,?,?,?,?,?)";
 
-   db.query(sqlStatement,[name, email, courseName, projectDetails,status,jsonImg],(err, result) => {
+   db.query(sqlStatement,[name, email, courseName, projectDetails,status,image],(err, result) => {
         try {
             res.status(201).json({
                 status: "success",

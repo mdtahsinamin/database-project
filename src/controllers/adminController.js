@@ -30,11 +30,14 @@ exports.createAdmin = (req, res) =>{
 
 exports.isAdmin = (req, res) => {
      const {email} = req.body;
+
+     console.log(email);
      
      const sqlStatement = "SELECT email FROM admin WHERE email = ?";
 
      db.query(sqlStatement,[email], (err, result)=>{
-        if(email === result[0].email){
+        try {
+          if(email === result[0].email){
           res.status(200).json({
             status: "success",
             data:{
@@ -42,8 +45,8 @@ exports.isAdmin = (req, res) => {
             }
           })
         }
-        else{
-          res.status(401).json({
+        } catch (error) {
+          res.status(200).json({
             status: "error",
             data:{
               isAdmin: false
@@ -51,5 +54,4 @@ exports.isAdmin = (req, res) => {
           })
         }
      })
-
 }

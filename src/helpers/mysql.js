@@ -3,17 +3,17 @@ const dotenv = require("dotenv");
 
 dotenv.config({path:"./config.env"});
 const schemas = {
-  admins: `CREATE TABLE service (Id int NOT NULL AUTO_INCREMENT , email varchar(255) unique, PRIMARY KEY (ID)` ,
-  service : `CREATE TABLE service (serviceId int NOT NULL AUTO_INCREMENT ,serviceTitle VARCHAR(255), description VARCHAR(255),image JSON,PRIMARY KEY (serviceId))` ,
-  customers: `CREATE TABLE customers(customerId int NOT NULL AUTO_INCREMENT, name VARCHAR(255) , email VARCHAR(100), courseName VARCHAR(255), projectDetails VARCHAR(255), status VARCHAR(20),  image JSON, PRIMARY KEY (customerId))`,
+  admins: `CREATE TABLE admin (ID int NOT NULL AUTO_INCREMENT , email varchar(255) unique, PRIMARY KEY (ID)` ,
+  service : `CREATE TABLE service (serviceId int NOT NULL AUTO_INCREMENT ,serviceTitle VARCHAR(255), description VARCHAR(255),image VARCHAR(2048),PRIMARY KEY (serviceId))` ,
+  customers: `CREATE TABLE customers(customerId int NOT NULL AUTO_INCREMENT, name VARCHAR(255) , email VARCHAR(100), courseName VARCHAR(255), projectDetails VARCHAR(255), status VARCHAR(20),  image VARCHAR(2048), PRIMARY KEY (customerId))`,
   reviews: `CREATE TABLE reviews(reviewId int NOT NULL AUTO_INCREMENT, name VARCHAR(255) , companyName VARCHAR(100) ,description VARCHAR(255), photoUrl VARCHAR(2083) , PRIMARY KEY (reviewId))`
 }
 
 const db = mysql.createConnection({
-    host: `${process.env.PLANETSCALE_DB_HOST}`,
-    user: `${process.env.PLANETSCALE_DB_USERNAME}`,
-    password: `${process.env.PLANETSCALE_DB_PASSWORD}`,
-    database: `${process.env.PLANETSCALE_DB}`
+    host:"localhost",
+    user:"root",
+    password:"",
+    database:"creative-agency"
 });
 
 

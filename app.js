@@ -9,7 +9,7 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors())
-app.use(fileUpload());
+app.use(fileUpload({ useTempFiles : true}));
 app.use(express.static('services'));
 
 
